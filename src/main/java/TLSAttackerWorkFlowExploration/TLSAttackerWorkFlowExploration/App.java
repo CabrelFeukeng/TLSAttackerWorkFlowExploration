@@ -9,6 +9,7 @@ import de.rub.nds.tlsattacker.core.workflow.WorkflowTrace;
 import executer.TlsWorkflowExecutor;
 import handler.TlsMessageHandler;
 import serverlauncher.OpenSSLServerLauncher;
+import utils.TraceToString;
 import workflow.TlsWorkflowBuilder;
 
 public class App 
@@ -47,6 +48,8 @@ public class App
                 System.out.println("Response: " + new String(data));
             }
             handler.logSummary();
+            
+            System.out.println((new TraceToString(state.getWorkflowTrace())).toString());
 
         } finally {
             server.stop();

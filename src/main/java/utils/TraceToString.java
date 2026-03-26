@@ -11,6 +11,28 @@ import de.rub.nds.tlsattacker.core.workflow.action.TlsAction;
 
 public class TraceToString {
 	
+	// ANSI color codes with bold variants
+	private static final String RESET = "\u001B[0m";
+	private static final String BOLD = "\u001B[1m";
+	private static final String DIM = "\u001B[2m";
+	
+	// Foreground colors
+	private static final String BLACK = "\u001B[30m";
+	private static final String RED = "\u001B[31m";
+	private static final String GREEN = "\u001B[32m";
+	private static final String YELLOW = "\u001B[33m";
+	private static final String BLUE = "\u001B[34m";
+	private static final String PURPLE = "\u001B[35m";
+	private static final String CYAN = "\u001B[36m";
+	private static final String WHITE = "\u001B[37m";
+	
+	// Bright colors
+	private static final String BRIGHT_RED = "\u001B[91m";
+	private static final String BRIGHT_GREEN = "\u001B[92m";
+	private static final String BRIGHT_YELLOW = "\u001B[93m";
+	private static final String BRIGHT_BLUE = "\u001B[94m";
+	private static final String BRIGHT_CYAN = "\u001B[96m";
+	
 	private WorkflowTrace trace;
 	
 	public TraceToString(WorkflowTrace trace) {
@@ -20,17 +42,22 @@ public class TraceToString {
 	public String toString() {
 		
 	    if (trace == null) {
-	        return "TlsWorkflowBuilder [ no trace builded ]";
+	        return BRIGHT_YELLOW + "⚠️  " + BOLD + "TlsWorkflowBuilder" + RESET + BRIGHT_YELLOW + " [ no trace built ]" + RESET;
 	    }
 
 	    StringBuilder sb = new StringBuilder();
 	    List<TlsAction> actions = trace.getTlsActions();
 
-	    sb.append("\n══════════════════════════════════════════════════ \n");
-	    sb.append(  "           TLS WORKFLOW TRACE                      \n");
-	    sb.append(  "══════════════════════════════════════════════════\n");
-	    sb.append(String.format("  Number of actions : %-28d %n", actions.size()));
-	    sb.append(  "══════════════════════════════════════════════════\n");
+	    // Header with gradient effect
+	    sb.append(GREEN + BOLD + "\n╔══════════════════════════════════════════════════════════╗\n");
+	    sb.append("║                    🔐 TLS WORKFLOW TRACE                 ║\n");
+	    sb.append("╚══════════════════════════════════════════════════════════╝\n" + RESET);
+	    
+	    // Stats line
+	    sb.append(GREEN + "  📊 " + BOLD + "Total Actions" + RESET + GREEN + " : " + RESET);
+	    sb.append(BRIGHT_GREEN + BOLD + String.format("%-28d", actions.size()) + RESET);
+	    sb.append(GREEN + " 🔄" + RESET + "\n");
+	    sb.append(DIM + "  " + "─".repeat(54) + "\n" + RESET);
 
 	    for (int i = 0; i < actions.size(); i++) {
 	        TlsAction action = actions.get(i);
@@ -38,38 +65,51 @@ public class TraceToString {
 	        String actionType  = action.getClass().getSimpleName();
 	        String direction   = resolveDirection(action);
 	        String executed    = action.isExecuted()
-	                             ? "✔ executed"
-	                             : "✘ no executed";
+	                             ? BRIGHT_GREEN + "✓ EXECUTED" + RESET
+	                             : BRIGHT_RED + "✗ NOT EXECUTED" + RESET;
 	        String asPlanned   = action.isExecuted()
-	                             ? (action.executedAsPlanned() ? "✔ as expected" : "✘ not as expected")
-	                             : "─";
+	                             ? (action.executedAsPlanned() ? BRIGHT_GREEN + "✓ AS EXPECTED" + RESET : BRIGHT_RED + "✗ NOT AS EXPECTED" + RESET)
+	                             : DIM + "— NOT APPLICABLE" + RESET;
 
-	        sb.append(String.format("  [%02d] %s %-38s %n", i + 1, direction, actionType));
-	        sb.append(String.format("       Statut   : %-31s %n", executed));
-	        sb.append(String.format("       Result : %-31s %n", asPlanned));
+	        // Action header with number and type
+	        sb.append(String.format("\n  " + BLACK + BOLD + "[%02d]" + RESET + " %s %s\n", i + 1, direction, actionType));
+	        sb.append(String.format("     " + BLACK + "📌 Status" + RESET + "   : %s\n", executed));
+	        sb.append(String.format("     " + BLACK + "🎯 Result" + RESET + "   : %s\n", asPlanned));
 
 	        List<ProtocolMessage> messages = resolveMessages(action);
 	        if (messages != null && !messages.isEmpty()) {
-	            sb.append("       Messages :                                 \n");
+	            sb.append("     " + GREEN + "📨 Messages" + RESET + " :\n");
 	            for (ProtocolMessage msg : messages) {
 	                String msgName = msg.getClass().getSimpleName();
-	                sb.append(String.format("         • %-39s %n", msgName));
+	                String coloredMsg = colorizeMessage(msgName);
+	                sb.append(String.format("        %s %s\n", getMessageIcon(msgName), coloredMsg));
 	            }
 	        }
 
 	        if (i < actions.size() - 1) {
-	            sb.append("  ────────────────────────────────────────────── \n");
+	            sb.append(DIM + "     ──────────────────────────────────────────────────────\n" + RESET);
 	        }
 	    }
 
-	    sb.append("══════════════════════════════════════════════════");
+	    sb.append(BRIGHT_CYAN + "\n══════════════════════════════════════════════════════════\n" + RESET);
 	    return sb.toString();
 	}
 
 	private String resolveDirection(TlsAction action) {
-	    if (action instanceof SendAction)    return "→ SEND   ";
-	    if (action instanceof ReceiveAction) return "← RECEIVE";
-	    return "  OTHER  ";
+	    if (action instanceof SendAction)    return BRIGHT_GREEN + "📤 SEND    " + RESET;
+	    if (action instanceof ReceiveAction) return BRIGHT_BLUE + "📥 RECEIVE " + RESET;
+	    return DIM + "⚙️  OTHER   " + RESET;
+	}
+	
+	private String getMessageIcon(String msgName) {
+		if (msgName.contains("ClientHello")) return "🖥️";
+		if (msgName.contains("ServerHello")) return "🖥️";
+		if (msgName.contains("Certificate")) return "📜";
+		if (msgName.contains("Finished")) return "✅";
+		if (msgName.contains("Alert")) return "⚠️";
+		if (msgName.contains("Application")) return "📄";
+		if (msgName.contains("ChangeCipherSpec")) return "🔐";
+		return "📦";
 	}
 
 	private List<ProtocolMessage> resolveMessages(TlsAction action) {
@@ -85,5 +125,20 @@ public class TraceToString {
 	    }
 	    return Collections.emptyList();
 	}
-
+	
+	private String colorizeMessage(String msgName) {
+		// Color different message types for better readability
+		if (msgName.contains("ClientHello")) return BRIGHT_GREEN + msgName + RESET;
+		if (msgName.contains("ServerHello")) return BRIGHT_BLUE + msgName + RESET;
+		if (msgName.contains("Certificate")) return BRIGHT_CYAN + msgName + RESET;
+		if (msgName.contains("Finished")) return BRIGHT_PURPLE() + msgName + RESET;
+		if (msgName.contains("Alert")) return BRIGHT_RED + msgName + RESET;
+		if (msgName.contains("Application")) return BRIGHT_YELLOW + msgName + RESET;
+		if (msgName.contains("ChangeCipherSpec")) return BRIGHT_YELLOW + msgName + RESET;
+		return WHITE + msgName + RESET;
+	}
+	
+	private String BRIGHT_PURPLE() {
+		return "\u001B[95m";
+	}
 }
