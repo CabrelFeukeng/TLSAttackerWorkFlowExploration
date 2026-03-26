@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <!-- Dossier de sortie des logs -->
+        <Property name="LOG_DIR">logs</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+
+        <!-- ── Console ──────────────────────────────────────────────── -->
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- ── Fichier principal (tout) ─────────────────────────────── -->
+        <RollingFile name="FILE_ALL"
+                     fileName="${LOG_DIR}/tls-attacker.log"
+                     filePattern="${LOG_DIR}/tls-attacker-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingFile>
+
+        <!-- ── Fichier erreurs uniquement ───────────────────────────── -->
+        <RollingFile name="FILE_ERROR"
+                     fileName="${LOG_DIR}/tls-attacker-error.log"
+                     filePattern="${LOG_DIR}/tls-attacker-error-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- ── Logger TLS-Attacker (DEBUG pour voir tout) ───────────── -->
+        <Logger name="de.rub.nds.tlsattacker" level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE_ALL"/>
+            <AppenderRef ref="FILE_ERROR"/>
+        </Logger>
+
+        <!-- ── Logger de votre application ─────────────────────────── -->
+        <Logger name="config"    level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE_ALL"/>
+        </Logger>
+        <Logger name="executer"  level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE_ALL"/>
+        </Logger>
+        <Logger name="workflow"  level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE_ALL"/>
+        </Logger>
+        <Logger name="handler"   level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE_ALL"/>
+        </Logger>
+
+        <!-- ── Root (tout le reste) ─────────────────────────────────── -->
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="FILE_ALL"/>
+            <AppenderRef ref="FILE_ERROR"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
