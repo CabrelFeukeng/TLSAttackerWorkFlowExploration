@@ -11,25 +11,15 @@ import de.rub.nds.tlsattacker.core.workflow.action.TlsAction;
 
 public class TraceToString {
 	
-	// ANSI color codes with bold variants
 	private static final String RESET = "\u001B[0m";
 	private static final String BOLD = "\u001B[1m";
 	private static final String DIM = "\u001B[2m";
 	
-	// Foreground colors
 	private static final String BLACK = "\u001B[30m";
-	private static final String RED = "\u001B[31m";
 	private static final String GREEN = "\u001B[32m";
-	private static final String YELLOW = "\u001B[33m";
-	private static final String BLUE = "\u001B[34m";
-	private static final String PURPLE = "\u001B[35m";
-	private static final String CYAN = "\u001B[36m";
-	private static final String WHITE = "\u001B[37m";
-	
-	// Bright colors
+
 	private static final String BRIGHT_RED = "\u001B[91m";
 	private static final String BRIGHT_GREEN = "\u001B[92m";
-	private static final String BRIGHT_YELLOW = "\u001B[93m";
 	private static final String BRIGHT_BLUE = "\u001B[94m";
 	private static final String BRIGHT_CYAN = "\u001B[96m";
 	
@@ -42,7 +32,7 @@ public class TraceToString {
 	public String toString() {
 		
 	    if (trace == null) {
-	        return BRIGHT_YELLOW + "⚠️  " + BOLD + "TlsWorkflowBuilder" + RESET + BRIGHT_YELLOW + " [ no trace built ]" + RESET;
+	        return BLACK + "⚠️  " + BOLD + "TlsWorkflowBuilder" + RESET + BLACK + " [ no trace built ]" + RESET;
 	    }
 
 	    StringBuilder sb = new StringBuilder();
@@ -71,6 +61,7 @@ public class TraceToString {
 	                             ? (action.executedAsPlanned() ? BRIGHT_GREEN + "✓ AS EXPECTED" + RESET : BRIGHT_RED + "✗ NOT AS EXPECTED" + RESET)
 	                             : DIM + "— NOT APPLICABLE" + RESET;
 
+
 	        // Action header with number and type
 	        sb.append(String.format("\n  " + BLACK + BOLD + "[%02d]" + RESET + " %s %s\n", i + 1, direction, actionType));
 	        sb.append(String.format("     " + BLACK + "📌 Status" + RESET + "   : %s\n", executed));
@@ -87,8 +78,9 @@ public class TraceToString {
 	        }
 
 	        if (i < actions.size() - 1) {
-	            sb.append(DIM + "     ──────────────────────────────────────────────────────\n" + RESET);
+	            sb.append(DIM + "──────────────────────────────────────────────────────\n" + RESET);
 	        }
+	        
 	    }
 
 	    sb.append(BRIGHT_CYAN + "\n══════════════════════════════════════════════════════════\n" + RESET);
@@ -133,9 +125,9 @@ public class TraceToString {
 		if (msgName.contains("Certificate")) return BRIGHT_CYAN + msgName + RESET;
 		if (msgName.contains("Finished")) return BRIGHT_PURPLE() + msgName + RESET;
 		if (msgName.contains("Alert")) return BRIGHT_RED + msgName + RESET;
-		if (msgName.contains("Application")) return BRIGHT_YELLOW + msgName + RESET;
-		if (msgName.contains("ChangeCipherSpec")) return BRIGHT_YELLOW + msgName + RESET;
-		return WHITE + msgName + RESET;
+		if (msgName.contains("Application")) return BLACK + msgName + RESET;
+		if (msgName.contains("ChangeCipherSpec")) return BLACK + msgName + RESET;
+		return BLACK + msgName + RESET;
 	}
 	
 	private String BRIGHT_PURPLE() {

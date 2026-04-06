@@ -1,0 +1,49 @@
+{
+  "messageClass": "ClientHelloMessage",
+  "timestamp": "2026-04-06T13:47:04.863825",
+  "handshakeType": "ClientHello (1)",
+  "handshakeLength": 270,
+  "legacyVersion": "TLS12 (0x0303)",
+  "clientRandom": "60B420BB3851D9D47ACB933DBE70399BF6C92DA33AF01D4FB770E98C0325F41D",
+  "legacySessionIdLength": 0,
+  "cipherSuiteLength": 2,
+  "cipherSuites": [
+    "TLS_AES_128_GCM_SHA256"
+  ],
+  "legacyCompressionMethodsLength": 1,
+  "legacyCompressionMethods": "none (0x00)",
+  "encryptedClientHello": false,
+  "extensionsTotalLength": 227,
+  "extensions": [
+    {
+      "extensionName": "ec_point_formats",
+      "extensionLength": 2,
+      "extensionContent": "0100"
+    },
+    {
+      "extensionName": "elliptic_curves",
+      "extensionLength": 80,
+      "extensionContent": "004E000F0010001100120013001400150016001700180019000100020003000400050006000700080009000A000B000C000D000E001D001E0029001A001B001C001F0020002101000101010201030104"
+    },
+    {
+      "extensionName": "signature_and_hash_algorithms",
+      "extensionLength": 10,
+      "extensionContent": "rsa_pss_rsae_sha256, rsa_pss_rsae_sha384, ecdsa_secp256r1_sha256, Inconnu (0x0807)"
+    },
+    {
+      "extensionName": "supported_versions",
+      "extensionLength": 3,
+      "extensionContent": "TLS13 (0x0304)"
+    },
+    {
+      "extensionName": "key_share",
+      "extensionLength": 107,
+      "extensionContent": "namedGroup\u003d0x0069, keyLength\u003d29, publicKey\u003d0020B1E8236B631E19D86B28A6FF4D5F4B39D41EDDF47AB7D3A9579506"
+    },
+    {
+      "extensionName": "renegotiation_info",
+      "extensionLength": 1,
+      "extensionContent": "00"
+    }
+  ]
+}

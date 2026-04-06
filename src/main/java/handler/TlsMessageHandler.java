@@ -73,7 +73,7 @@ public class TlsMessageHandler {
 	        for (TlsAction action : trace.getTlsActions()) {
 	            if (action instanceof ReceiveAction) {
 	                List<ProtocolMessage> msgs = ((ReceiveAction) action).getReceivedMessages();
-	                if (msgs != null) received.addAll(msgs);  // Add all messages received in this action
+	                if (msgs != null) received.addAll(msgs);  
 	            }
 	        }
 	        return received;
@@ -85,7 +85,7 @@ public class TlsMessageHandler {
 	    */
 	   public boolean receivedAlert() {
 	        return getReceivedMessages().stream()
-	            .anyMatch(m -> m instanceof AlertMessage);  // Check for any alert message in received messages
+	            .anyMatch(m -> m instanceof AlertMessage);
 	    }
 	   
 	   /**
@@ -94,8 +94,8 @@ public class TlsMessageHandler {
 	    */
 	   public byte[] getApplicationData() {
 	        return getReceivedMessages().stream()
-	            .filter(m -> m instanceof ApplicationMessage)  // Keep only application messages
-	            .map(m -> ((ApplicationMessage) m).getData().getValue())  // Extract the data from each message
+	            .filter(m -> m instanceof ApplicationMessage)  
+	            .map(m -> ((ApplicationMessage) m).getData().getValue()) 
 	            .reduce(new byte[0], (a, b) -> {
 	                // Merge byte arrays: a = accumulated result, b = new data to add
 	                byte[] merged = new byte[a.length + b.length];
