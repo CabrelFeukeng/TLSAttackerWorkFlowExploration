@@ -413,9 +413,7 @@ Message qui vérifie l'intégrité du handshake.
 |----------|-------------|
 | [RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446) | The Transport Layer Security (TLS) Protocol Version 1.3 |
 | [IANA TLS Parameters](https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml) | Liste complète des extensions, cipher suites, etc. |
-| [TLS 1.3 Handshake (Cloudflare)](https://blog.cloudflare.com/tls-1-3-handshake/) | Explication visuelle |
 
----
 
 ## Annexe : Exemple de handshake analysé
 
