@@ -1,0 +1,5 @@
+{
+  "messageClass": "ChangeCipherSpecMessage",
+  "timestamp": "2026-04-15T14:27:05.252469600",
+  "warning": "Message type not explicitly handled"
+}

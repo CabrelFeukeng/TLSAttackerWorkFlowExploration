@@ -5,9 +5,6 @@ import java.security.Security;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import config.OpenSSLServerConfig;
-import config.OpenSSLServerConfig.CipherSuite;
-import config.OpenSSLServerConfig.EcCurve;
-import config.OpenSSLServerConfig.TlsVersion;
 import de.rub.nds.tlsattacker.core.state.State;
 import de.rub.nds.tlsattacker.core.workflow.WorkflowTrace;
 import executer.TlsWorkflowExecutor;
@@ -26,26 +23,25 @@ public class App
     {
 
     	Security.insertProviderAt(new BouncyCastleProvider(), 1);
-
-    	OpenSSLServerConfig tls12 = OpenSSLServerConfig.defaultTls12();
-    	OpenSSLServerConfig tls13 = OpenSSLServerConfig.defaultTls13();
-
-    	OpenSSLServerLauncher launcher = new OpenSSLServerLauncher(tls13);
+        
+        /* */
+    	OpenSSLServerLauncher launcher = new OpenSSLServerLauncher(OpenSSLServerConfig.defaultTls13());
   
         try {
         	launcher.start();
         } catch (Exception e) {
             System.err.println("Unable to start OpenSSL server: " + e.getMessage());
             System.err.println("Make sure OpenSSL is installed: openssl version");
+
             return;
         }
+        
         
         try {
 
         	// Build the workflow
         	TlsWorkflowBuilder builder = new TlsWorkflowBuilderForTLS13();
-            WorkflowTrace trace = builder.build();
-            
+            WorkflowTrace trace = builder.build();    
 
             // Execution
             TlsWorkflowExecutor executor = TlsWorkflowExecutor.getInstance();

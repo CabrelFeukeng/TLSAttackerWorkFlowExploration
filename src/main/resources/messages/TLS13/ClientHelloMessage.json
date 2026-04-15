@@ -1,14 +1,17 @@
 {
   "messageClass": "ClientHelloMessage",
-  "timestamp": "2026-04-06T13:47:04.863825",
+  "timestamp": "2026-04-15T14:27:05.205774700",
   "handshakeType": "ClientHello (1)",
-  "handshakeLength": 270,
+  "handshakeLength": 276,
   "legacyVersion": "TLS12 (0x0303)",
   "clientRandom": "60B420BB3851D9D47ACB933DBE70399BF6C92DA33AF01D4FB770E98C0325F41D",
   "legacySessionIdLength": 0,
-  "cipherSuiteLength": 2,
+  "cipherSuiteLength": 8,
   "cipherSuites": [
-    "TLS_AES_128_GCM_SHA256"
+    "TLS_CHACHA20_POLY1305_SHA256",
+    "TLS_AES_128_GCM_SHA256",
+    "TLS_AES_128_CCM_8_SHA256",
+    "TLS_AES_128_CCM_SHA256"
   ],
   "legacyCompressionMethodsLength": 1,
   "legacyCompressionMethods": "none (0x00)",
@@ -28,7 +31,7 @@
     {
       "extensionName": "signature_and_hash_algorithms",
       "extensionLength": 10,
-      "extensionContent": "rsa_pss_rsae_sha256, rsa_pss_rsae_sha384, ecdsa_secp256r1_sha256, Inconnu (0x0807)"
+      "extensionContent": "rsa_pss_rsae_sha256, rsa_pss_rsae_sha384, ecdsa_secp256r1_sha256, Unknown (0x0807)"
     },
     {
       "extensionName": "supported_versions",

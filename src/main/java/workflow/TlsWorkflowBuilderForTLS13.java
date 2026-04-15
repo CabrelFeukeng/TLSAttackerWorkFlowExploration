@@ -4,6 +4,7 @@ import config.TlsClientConfigForTLS13;
 import de.rub.nds.tlsattacker.core.config.Config;
 import de.rub.nds.tlsattacker.core.protocol.message.CertificateMessage;
 import de.rub.nds.tlsattacker.core.protocol.message.CertificateVerifyMessage;
+import de.rub.nds.tlsattacker.core.protocol.message.ChangeCipherSpecMessage;
 import de.rub.nds.tlsattacker.core.protocol.message.ClientHelloMessage;
 import de.rub.nds.tlsattacker.core.protocol.message.EncryptedExtensionsMessage;
 import de.rub.nds.tlsattacker.core.protocol.message.FinishedMessage;
@@ -50,6 +51,7 @@ public class TlsWorkflowBuilderForTLS13 implements TlsWorkflowBuilder  {
 	     */
 	    trace.addTlsAction(new ReceiveAction(
 	        new ServerHelloMessage(),
+	        new ChangeCipherSpecMessage(),
 	        new EncryptedExtensionsMessage(),
 	        new CertificateMessage(),
 	        new CertificateVerifyMessage(),

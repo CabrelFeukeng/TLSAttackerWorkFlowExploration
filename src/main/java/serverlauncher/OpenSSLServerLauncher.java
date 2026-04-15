@@ -46,7 +46,6 @@ public class OpenSSLServerLauncher {
     // -----------------------------------------------------------------------
     // Constructeurs
     // -----------------------------------------------------------------------
-
     public OpenSSLServerLauncher(OpenSSLServerConfig config) {
         this.config = config;
     }
@@ -131,13 +130,14 @@ public class OpenSSLServerLauncher {
         ProcessBuilder pb = new ProcessBuilder(
             "openssl", "req",
             "-x509",
-            "-newkey", "rsa:2048",
+            "-newkey", "rsa:2048",  // ou "rsa:2048"
             "-keyout", config.keyFile(),
             "-out",    config.certFile(),
             "-days",   "365",
             "-nodes",
             "-subj",   "/CN=" + config.host()
         );
+        
         pb.redirectErrorStream(true);
         Process proc = pb.start();
         drainToLog(proc.getInputStream(), "openssl-keygen");
@@ -158,7 +158,9 @@ public class OpenSSLServerLauncher {
         LOG.info("Starting OpenSSL server — command: {}", String.join(" ", command));
 
         ProcessBuilder pb = new ProcessBuilder(command);
+        
         pb.redirectErrorStream(true);
+        pb.inheritIO();
         serverProcess = pb.start();
 
         startupOutput.clear();
@@ -220,10 +222,6 @@ public class OpenSSLServerLauncher {
         );
     }
 
-    /**
-     * Construit un message d'erreur détaillé incluant la sortie OpenSSL capturée,
-     * pour éviter d'avoir à activer le debug pour comprendre le problème.
-     */
     private String buildCrashMessage(int exitCode) {
         StringBuilder sb = new StringBuilder();
         sb.append("OpenSSL server stopped prematurely (exit: ").append(exitCode).append(").\n");
@@ -240,10 +238,6 @@ public class OpenSSLServerLauncher {
         }
         return sb.toString();
     }
-
-    // -----------------------------------------------------------------------
-    // Utilitaires
-    // -----------------------------------------------------------------------
 
     private boolean isPortOpen() {
         try (java.net.Socket socket = new java.net.Socket()) {

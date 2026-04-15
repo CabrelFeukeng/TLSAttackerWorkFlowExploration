@@ -64,11 +64,15 @@ public final class OpenSSLServerConfig {
         cmd.add("-accept"); cmd.add(String.valueOf(port));
         cmd.add("-cert");   cmd.add(certFile);
         cmd.add("-key");    cmd.add(keyFile);
+        
+        
 
         if (tlsVersion != null) {
             cmd.add(tlsVersion.flag());
+        } else {
+            cmd.add("-tls1_3"); // Par défaut
         }
-
+        
         if (!cipherSuites.isEmpty()) {
             List<String> tls12 = cipherSuites.stream()
                 .filter(c -> !c.isTls13())
@@ -84,7 +88,7 @@ public final class OpenSSLServerConfig {
                 cmd.add(String.join(":", tls12));
             }
             if (!tls13.isEmpty()) {
-                cmd.add("-cipher");
+                cmd.add("-ciphersuites");
                 cmd.add(String.join(":", tls13));
             }
         }
@@ -99,17 +103,9 @@ public final class OpenSSLServerConfig {
                 cmd.add(ecCurve.curveName());
             }
         }
+        
+        cmd.add("-www");
 
-        if (verbose) {
-            cmd.add("-msg");
-            cmd.add("-state");
-        }
-
-        if (extraArgs != null && !extraArgs.isBlank()) {
-            for (String arg : extraArgs.split("\\s+")) {
-                cmd.add(arg);
-            }
-        }
 
         return List.copyOf(cmd);
     }
