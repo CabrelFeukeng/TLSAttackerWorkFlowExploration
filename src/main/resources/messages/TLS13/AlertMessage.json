@@ -1,0 +1,6 @@
+{
+  "messageClass": "AlertMessage",
+  "timestamp": "2026-04-16T09:52:54.378256700",
+  "alertLevel": "fatal (2)",
+  "alertDescription": "handshake_failure (40) - Handshake failed"
+}

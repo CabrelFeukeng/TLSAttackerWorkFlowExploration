@@ -18,7 +18,7 @@ public class OpenSSLConfigBuiderImp implements OpenSSLConfigBuider{
     private List<CipherSuite> cipherSuites = new ArrayList<>();
     private EcCurve      ecCurve      = null;
     private boolean      verbose      = false;
-    private String       extraArgs    = null;
+    private boolean wwwArg = false;
 
     public OpenSSLConfigBuiderImp() {}
 
@@ -29,7 +29,7 @@ public class OpenSSLConfigBuiderImp implements OpenSSLConfigBuider{
     public OpenSSLConfigBuider version(TlsVersion v)         { this.tlsVersion = v;           return this; }
     public OpenSSLConfigBuider ecCurve(EcCurve curve)        { this.ecCurve = curve;           return this; }
     public OpenSSLConfigBuider verbose(boolean v)            { this.verbose = v;               return this; }
-    public OpenSSLConfigBuider extraArgs(String args)        { this.extraArgs = args;          return this; }
+    public OpenSSLConfigBuider wwwArg(boolean wwwArg)        { this.wwwArg = wwwArg;          return this; }
 
     public OpenSSLConfigBuider cipherSuite(CipherSuite cs) {
         this.cipherSuites.add(cs);
@@ -48,7 +48,6 @@ public class OpenSSLConfigBuiderImp implements OpenSSLConfigBuider{
     }
     
     public String       host()         { return host; }
-    public String       extraArgs()         { return extraArgs; }
     public int          port()         { return port; }
     public String       certFile()     { return certFile; }
     public String       keyFile()      { return keyFile; }
@@ -56,6 +55,7 @@ public class OpenSSLConfigBuiderImp implements OpenSSLConfigBuider{
     public List<CipherSuite> cipherSuites() { return cipherSuites; }
     public EcCurve      ecCurve()      { return ecCurve; }
     public boolean      verbose()      { return verbose; }
+    public boolean      wwwArg()      { return wwwArg; }
     
     
 

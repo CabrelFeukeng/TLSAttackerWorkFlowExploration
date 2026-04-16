@@ -1,24 +1,5 @@
 {
   "messageClass": "ServerHelloMessage",
-  "timestamp": "2026-04-15T14:27:05.247966500",
-  "handshakeType": "ServerHello (2)",
-  "handshakeLength": 86,
-  "selectedVersion": "TLS12 (0x0303)",
-  "Random": "1BBEBED0464ED7428E06172DD28A807966E98C950CEAF0CEE2FB06F214B35419",
-  "legacySessionIdLength": 0,
-  "selectedCipherSuite": "TLS_AES_128_GCM_SHA256",
-  "selectedCompressionMethod": "0x00",
-  "extensionsTotalLength": 46,
-  "extensions": [
-    {
-      "extensionName": "supported_versions",
-      "extensionLength": 2,
-      "extensionContent": "TLS13 (0x0304)"
-    },
-    {
-      "extensionName": "key_share",
-      "extensionLength": 36,
-      "extensionContent": "namedGroup\u003dx25519, keyLength\u003d32, publicKey\u003d146B54EB6434DBAB0043212A4577C2B059A98A6032E5DFC5C615FDC230207D2D"
-    }
-  ]
+  "timestamp": "2026-04-16T10:21:56.593883100",
+  "extensions": "NO EXTENSIONS"
 }

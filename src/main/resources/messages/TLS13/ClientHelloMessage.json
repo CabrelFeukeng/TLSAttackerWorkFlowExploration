@@ -1,7 +1,7 @@
 {
   "messageClass": "ClientHelloMessage",
-  "timestamp": "2026-04-15T14:27:05.205774700",
-  "handshakeType": "ClientHello (1)",
+  "timestamp": "2026-04-16T10:21:56.457668400",
+  "handshakeType": "client_hello (1) - Client initiates handshake",
   "handshakeLength": 276,
   "legacyVersion": "TLS12 (0x0303)",
   "clientRandom": "60B420BB3851D9D47ACB933DBE70399BF6C92DA33AF01D4FB770E98C0325F41D",

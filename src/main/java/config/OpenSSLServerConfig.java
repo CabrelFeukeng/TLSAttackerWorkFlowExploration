@@ -22,7 +22,7 @@ public final class OpenSSLServerConfig {
     private final List<CipherSuite> cipherSuites;
     private final EcCurve      ecCurve;
     private final boolean      verbose;       // -msg -state
-    private final String       extraArgs;     
+    private final boolean wwwArg;
 
     public OpenSSLServerConfig(OpenSSLConfigBuiderImp b) {
         this.host          = b.host();
@@ -33,7 +33,8 @@ public final class OpenSSLServerConfig {
         this.cipherSuites  = List.copyOf(b.cipherSuites());
         this.ecCurve       = b.ecCurve();
         this.verbose       = b.verbose();
-        this.extraArgs     = b.extraArgs();
+        this.wwwArg        = b.wwwArg();
+        
     }
 
     public static OpenSSLConfigBuider builder() { return new OpenSSLConfigBuiderImp(); }
@@ -42,6 +43,7 @@ public final class OpenSSLServerConfig {
     public static OpenSSLServerConfig defaultTls12() {
         return builder()
             .version(TlsVersion.TLS_1_2)
+            .wwwArg(true)
             .cipherSuite(CipherSuite.TLS_RSA_WITH_AES_128_GCM_SHA256)
             .cipherSuite(CipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384)
             .build();
@@ -53,6 +55,7 @@ public final class OpenSSLServerConfig {
             .cipherSuite(CipherSuite.TLS_AES_256_GCM_SHA384)
             .cipherSuite(CipherSuite.TLS_AES_128_GCM_SHA256)
             .ecCurve(EcCurve.X25519)
+            .wwwArg(true)
             .build();
     }
 
@@ -104,9 +107,10 @@ public final class OpenSSLServerConfig {
             }
         }
         
-        cmd.add("-www");
-
-
+        if(wwwArg) {
+        	cmd.add("-www");
+        }
+        
         return List.copyOf(cmd);
     }
 

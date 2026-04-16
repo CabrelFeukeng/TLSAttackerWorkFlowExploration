@@ -16,9 +16,9 @@ public interface OpenSSLConfigBuider {
     public OpenSSLConfigBuider version(TlsVersion v);
     public OpenSSLConfigBuider ecCurve(EcCurve curve);
     public OpenSSLConfigBuider verbose(boolean v);
-    public OpenSSLConfigBuider extraArgs(String args);
     public OpenSSLConfigBuider cipherSuite(CipherSuite cs);
     public OpenSSLConfigBuider cipherSuites(List<CipherSuite> list);
     public OpenSSLServerConfig build();
+    public OpenSSLConfigBuider wwwArg(boolean wwArg);
 
 }
