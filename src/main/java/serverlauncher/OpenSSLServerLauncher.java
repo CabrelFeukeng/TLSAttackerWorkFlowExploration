@@ -14,20 +14,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * Lance un serveur OpenSSL s_server à partir d'une {@link OpenSSLServerConfig}.
- *
- * <pre>
- * OpenSSLServerConfig config = OpenSSLServerConfig.builder()
- *     .version(TlsVersion.TLS_1_2)
- *     .cipherSuite(CipherSuite.ECDHE_RSA_AES256_GCM_SHA384)
- *     .verbose(true)
- *     .build();
- *
- * OpenSSLServerLauncher launcher = new OpenSSLServerLauncher(config);
- * launcher.start();
- * // ... tests ...
- * launcher.stop();
- * </pre>
+ * 
  */
 public class OpenSSLServerLauncher {
 
@@ -43,9 +30,7 @@ public class OpenSSLServerLauncher {
     // Capture des premières lignes pour diagnostics en cas de crash
     private final List<String> startupOutput = new ArrayList<>();
 
-    // -----------------------------------------------------------------------
-    // Constructeurs
-    // -----------------------------------------------------------------------
+
     public OpenSSLServerLauncher(OpenSSLServerConfig config) {
         this.config = config;
     }

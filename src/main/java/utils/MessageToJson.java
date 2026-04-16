@@ -16,6 +16,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import config.GlobalConfig;
 import de.rub.nds.tlsattacker.core.constants.CipherSuite;
 import de.rub.nds.tlsattacker.core.constants.ExtensionType;
 import de.rub.nds.tlsattacker.core.constants.ProtocolVersion;
@@ -47,8 +48,6 @@ public class MessageToJson {
     private WorkflowTrace trace;  // The workflow trace containing TLS actions and messages
 
     private static final Logger LOGGER = LogManager.getLogger(MessageToJson.class);
-
-    private static final String DEFAULT_OUTPUT_DIR = "src/main/resources/messages/";  // Default output directory for JSON files
 
     /**
      * Constructor - initializes the converter with a workflow trace
@@ -129,7 +128,7 @@ public class MessageToJson {
      */
     private String resolveOutputPath(ProtocolMessage message, String TLS_Version) {
         String messageType = message.getClass().getSimpleName();  // e.g., "ClientHelloMessage"
-        return DEFAULT_OUTPUT_DIR + TLS_Version + "/" + messageType + ".json";
+        return GlobalConfig.DEFAULT_JSON_OUTPUT_DIR + TLS_Version + "/" + messageType + ".json";
     }
 
     /**

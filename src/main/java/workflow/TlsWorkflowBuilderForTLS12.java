@@ -1,7 +1,6 @@
 package workflow;
 
 import config.TlsClientConfigForTLS12;
-import config.TlsClientConfigForTLS13;
 import de.rub.nds.tlsattacker.core.protocol.message.*;
 import de.rub.nds.tlsattacker.core.workflow.WorkflowTrace;
 import de.rub.nds.tlsattacker.core.workflow.action.*;

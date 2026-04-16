@@ -3,7 +3,7 @@ package buider;
 import java.util.List;
 
 import config.OpenSSLServerConfig;
-import enums.CipherSuite;
+import enums.CipherSuiteC;
 import enums.EcCurve;
 import enums.TlsVersion;
 
@@ -16,8 +16,8 @@ public interface OpenSSLConfigBuider {
     public OpenSSLConfigBuider version(TlsVersion v);
     public OpenSSLConfigBuider ecCurve(EcCurve curve);
     public OpenSSLConfigBuider verbose(boolean v);
-    public OpenSSLConfigBuider cipherSuite(CipherSuite cs);
-    public OpenSSLConfigBuider cipherSuites(List<CipherSuite> list);
+    public OpenSSLConfigBuider cipherSuite(CipherSuiteC cs);
+    public OpenSSLConfigBuider cipherSuites(List<CipherSuiteC> list);
     public OpenSSLServerConfig build();
     public OpenSSLConfigBuider wwwArg(boolean wwArg);
 

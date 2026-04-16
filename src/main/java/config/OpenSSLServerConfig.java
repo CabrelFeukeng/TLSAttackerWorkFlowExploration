@@ -5,7 +5,7 @@ import java.util.List;
 
 import buider.OpenSSLConfigBuider;
 import buider.OpenSSLConfigBuiderImp;
-import enums.CipherSuite;
+import enums.CipherSuiteC;
 import enums.EcCurve;
 import enums.TlsVersion;
 
@@ -19,7 +19,7 @@ public final class OpenSSLServerConfig {
     private final String       certFile;
     private final String       keyFile;
     private final TlsVersion   tlsVersion;
-    private final List<CipherSuite> cipherSuites;
+    private final List<CipherSuiteC> cipherSuites;
     private final EcCurve      ecCurve;
     private final boolean      verbose;       // -msg -state
     private final boolean wwwArg;
@@ -44,16 +44,16 @@ public final class OpenSSLServerConfig {
         return builder()
             .version(TlsVersion.TLS_1_2)
             .wwwArg(true)
-            .cipherSuite(CipherSuite.TLS_RSA_WITH_AES_128_GCM_SHA256)
-            .cipherSuite(CipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384)
+            .cipherSuite(CipherSuiteC.TLS_RSA_WITH_AES_128_GCM_SHA256)
+            .cipherSuite(CipherSuiteC.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384)
             .build();
     }
 
     public static OpenSSLServerConfig defaultTls13() {
         return builder()
             .version(TlsVersion.TLS_1_3)
-            .cipherSuite(CipherSuite.TLS_AES_256_GCM_SHA384)
-            .cipherSuite(CipherSuite.TLS_AES_128_GCM_SHA256)
+            .cipherSuite(CipherSuiteC.TLS_AES_256_GCM_SHA384)
+            .cipherSuite(CipherSuiteC.TLS_AES_128_GCM_SHA256)
             .ecCurve(EcCurve.X25519)
             .wwwArg(true)
             .build();
@@ -79,11 +79,11 @@ public final class OpenSSLServerConfig {
         if (!cipherSuites.isEmpty()) {
             List<String> tls12 = cipherSuites.stream()
                 .filter(c -> !c.isTls13())
-                .map(CipherSuite::opensslName)
+                .map(CipherSuiteC::opensslName)
                 .toList();
             List<String> tls13 = cipherSuites.stream()
-                .filter(CipherSuite::isTls13)
-                .map(CipherSuite::opensslName)
+                .filter(CipherSuiteC::isTls13)
+                .map(CipherSuiteC::opensslName)
                 .toList();
 
             if (!tls12.isEmpty()) {
@@ -120,7 +120,7 @@ public final class OpenSSLServerConfig {
     public String       certFile()     { return certFile; }
     public String       keyFile()      { return keyFile; }
     public TlsVersion   tlsVersion()   { return tlsVersion; }
-    public List<CipherSuite> cipherSuites() { return cipherSuites; }
+    public List<CipherSuiteC> cipherSuites() { return cipherSuites; }
     public EcCurve      ecCurve()      { return ecCurve; }
     public boolean      verbose()      { return verbose; }
 

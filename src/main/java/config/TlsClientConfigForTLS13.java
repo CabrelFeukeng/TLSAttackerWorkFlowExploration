@@ -8,10 +8,10 @@ import de.rub.nds.tlsattacker.core.constants.ProtocolVersion;
 import de.rub.nds.tlsattacker.core.constants.RunningModeType;
 import de.rub.nds.tlsattacker.core.constants.SignatureAndHashAlgorithm;
 
-public class TlsClientConfigForTLS13 {
+public class TlsClientConfigForTLS13 implements TlsClientConfig{
 	
-	private final String HOST = "localhost";
-	private final int PORT = 1234;
+	private final String HOST = GlobalConfig.HOST;
+	private final int PORT = GlobalConfig.PORT;
 	private static TlsClientConfigForTLS13 instance;
 	
     private TlsClientConfigForTLS13() {} 
@@ -52,7 +52,9 @@ public class TlsClientConfigForTLS13 {
 	        CipherSuite.TLS_CHACHA20_POLY1305_SHA256,
 	        CipherSuite.TLS_AES_128_GCM_SHA256,
 	        CipherSuite.TLS_AES_128_CCM_8_SHA256,
-	        CipherSuite.TLS_AES_128_CCM_SHA256
+	        CipherSuite.TLS_AES_128_CCM_SHA256,
+	        CipherSuite.TLS_SM4_GCM_SM3,
+	        CipherSuite.TLS_SM4_CCM_SM3
 	    );
 	    
 
@@ -79,6 +81,7 @@ public class TlsClientConfigForTLS13 {
 	
 	 public String getHost() { return HOST; }
 	 public int getPort()    { return PORT; }
+	 public String getTlsVersion() {return "TLS_13";}
 }
 
 

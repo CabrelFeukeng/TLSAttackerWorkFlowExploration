@@ -3,22 +3,23 @@ package buider;
 import java.util.ArrayList;
 import java.util.List;
 
+import config.GlobalConfig;
 import config.OpenSSLServerConfig;
-import enums.CipherSuite;
+import enums.CipherSuiteC;
 import enums.EcCurve;
 import enums.TlsVersion;
 
 public class OpenSSLConfigBuiderImp implements OpenSSLConfigBuider{
 	
-	private String       host         = "localhost";
-    private int          port         = 1234;
-    private String       certFile     = "src/main/resources/data/server.crt";
-    private String       keyFile      = "src/main/resources/data/server.key";
+	private String       host         = GlobalConfig.HOST;
+    private int          port         = GlobalConfig.PORT;
+    private String       certFile     = GlobalConfig.CERTIFICATE_PATH;
+    private String       keyFile      = GlobalConfig.KEY_PATH;
     private TlsVersion   tlsVersion   = TlsVersion.TLS_1_2;
-    private List<CipherSuite> cipherSuites = new ArrayList<>();
+    private List<CipherSuiteC> cipherSuites = new ArrayList<>();
     private EcCurve      ecCurve      = null;
     private boolean      verbose      = false;
-    private boolean wwwArg = false;
+    private boolean wwwArg = true;
 
     public OpenSSLConfigBuiderImp() {}
 
@@ -31,12 +32,12 @@ public class OpenSSLConfigBuiderImp implements OpenSSLConfigBuider{
     public OpenSSLConfigBuider verbose(boolean v)            { this.verbose = v;               return this; }
     public OpenSSLConfigBuider wwwArg(boolean wwwArg)        { this.wwwArg = wwwArg;          return this; }
 
-    public OpenSSLConfigBuider cipherSuite(CipherSuite cs) {
+    public OpenSSLConfigBuider cipherSuite(CipherSuiteC cs) {
         this.cipherSuites.add(cs);
         return this;
     }
 
-    public OpenSSLConfigBuider cipherSuites(List<CipherSuite> list) {
+    public OpenSSLConfigBuider cipherSuites(List<CipherSuiteC> list) {
         this.cipherSuites.addAll(list);
         return this;
     }
@@ -52,7 +53,7 @@ public class OpenSSLConfigBuiderImp implements OpenSSLConfigBuider{
     public String       certFile()     { return certFile; }
     public String       keyFile()      { return keyFile; }
     public TlsVersion   tlsVersion()   { return tlsVersion; }
-    public List<CipherSuite> cipherSuites() { return cipherSuites; }
+    public List<CipherSuiteC> cipherSuites() { return cipherSuites; }
     public EcCurve      ecCurve()      { return ecCurve; }
     public boolean      verbose()      { return verbose; }
     public boolean      wwwArg()      { return wwwArg; }

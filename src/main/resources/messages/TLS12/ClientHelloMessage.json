@@ -1,0 +1,40 @@
+{
+  "messageClass": "ClientHelloMessage",
+  "timestamp": "2026-04-16T13:33:21.244692600",
+  "handshakeType": "client_hello (1) - Client initiates handshake",
+  "handshakeLength": 78,
+  "legacyVersion": "TLS12 (0x0303)",
+  "clientRandom": "96112BF560B420BB3851D9D47ACB933DBE70399BF6C92DA33AF01D4FB770E98C",
+  "legacySessionIdLength": 0,
+  "cipherSuiteLength": 4,
+  "cipherSuites": [
+    "TLS_RSA_WITH_AES_128_GCM_SHA256",
+    "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384"
+  ],
+  "legacyCompressionMethodsLength": 1,
+  "legacyCompressionMethods": "none (0x00)",
+  "encryptedClientHello": false,
+  "extensionsTotalLength": 33,
+  "extensions": [
+    {
+      "extensionName": "ec_point_formats",
+      "extensionLength": 2,
+      "extensionContent": "0100"
+    },
+    {
+      "extensionName": "elliptic_curves",
+      "extensionLength": 6,
+      "extensionContent": "000400170018"
+    },
+    {
+      "extensionName": "signature_and_hash_algorithms",
+      "extensionLength": 8,
+      "extensionContent": "rsa_pkcs1_sha256, rsa_pkcs1_sha384, ecdsa_secp256r1_sha256"
+    },
+    {
+      "extensionName": "renegotiation_info",
+      "extensionLength": 1,
+      "extensionContent": "00"
+    }
+  ]
+}

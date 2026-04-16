@@ -1,0 +1,20 @@
+{
+  "messageClass": "ServerHelloMessage",
+  "timestamp": "2026-04-16T13:33:21.294292",
+  "handshakeType": "server_hello (2) - Server responds with parameters",
+  "handshakeLength": 77,
+  "selectedVersion": "TLS12 (0x0303)",
+  "Random": "47E8C409FE203738112C1EA256FD10404F6971B5D3ADEBFAA619E4A4DB274CA0",
+  "legacySessionIdLength": 32,
+  "legacySessionId": "650094CD59BBE41BA11824930E8F5CFEA10F94B6CE4D50C319DB1F629D081655",
+  "selectedCipherSuite": "TLS_RSA_WITH_AES_128_GCM_SHA256",
+  "selectedCompressionMethod": "0x00",
+  "extensionsTotalLength": 5,
+  "extensions": [
+    {
+      "extensionName": "renegotiation_info",
+      "extensionLength": 1,
+      "extensionContent": "00"
+    }
+  ]
+}

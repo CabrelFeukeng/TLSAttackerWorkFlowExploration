@@ -8,10 +8,10 @@ import de.rub.nds.tlsattacker.core.constants.ProtocolVersion;
 import de.rub.nds.tlsattacker.core.constants.RunningModeType;
 import de.rub.nds.tlsattacker.core.constants.SignatureAndHashAlgorithm;
 
-public class TlsClientConfigForTLS12 {
+public class TlsClientConfigForTLS12 implements TlsClientConfig {
 
-    private final String HOST = "localhost";
-    private final int    PORT = 1234;
+    private final String HOST = GlobalConfig.HOST;
+    private final int    PORT = GlobalConfig.PORT;
 
     private static TlsClientConfigForTLS12 instance;
 
@@ -53,7 +53,7 @@ public class TlsClientConfigForTLS12 {
             NamedGroup.SECP384R1
         );
 
-        // Algorithmes de signature TLS 1.2 (pas PSS — c'est TLS 1.3)
+        // Algorithmes de signature TLS 1.2 
         config.setDefaultClientSupportedSignatureAndHashAlgorithms(
             SignatureAndHashAlgorithm.RSA_SHA256,
             SignatureAndHashAlgorithm.RSA_SHA384,
@@ -70,4 +70,5 @@ public class TlsClientConfigForTLS12 {
 
     public String getHost() { return HOST; }
     public int    getPort() { return PORT; }
+    public String getTlsVersion() {return "TLS_12";}
 }

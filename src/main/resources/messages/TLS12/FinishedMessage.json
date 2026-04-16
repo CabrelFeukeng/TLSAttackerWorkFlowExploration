@@ -1,0 +1,7 @@
+{
+  "messageClass": "FinishedMessage",
+  "timestamp": "2026-04-16T13:33:21.324308300",
+  "handshakeType": "finished (20) - Handshake completion verification",
+  "handshakeLength": 12,
+  "verifyData": "642337E82E86CF0B9D959638"
+}
