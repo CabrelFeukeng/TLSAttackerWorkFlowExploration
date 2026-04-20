@@ -1,15 +1,17 @@
 {
   "messageClass": "ClientHelloMessage",
-  "timestamp": "2026-04-20T18:31:44.763292100",
+  "timestamp": "2026-04-20T18:25:13.657595300",
   "handshakeType": "client_hello (1) - Client initiates handshake",
-  "handshakeLength": 272,
+  "handshakeLength": 276,
   "legacyVersion": "TLS12 (0x0303)",
   "clientRandom": "60B420BB3851D9D47ACB933DBE70399BF6C92DA33AF01D4FB770E98C0325F41D",
   "legacySessionIdLength": 0,
-  "cipherSuiteLength": 4,
+  "cipherSuiteLength": 8,
   "cipherSuites": [
     "TLS_CHACHA20_POLY1305_SHA256",
-    "TLS_AES_128_GCM_SHA256"
+    "TLS_AES_128_GCM_SHA256",
+    "TLS_AES_128_CCM_8_SHA256",
+    "TLS_AES_128_CCM_SHA256"
   ],
   "legacyCompressionMethodsLength": 1,
   "legacyCompressionMethods": "none (0x00)",

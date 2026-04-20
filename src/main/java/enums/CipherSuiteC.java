@@ -10,6 +10,8 @@ public enum CipherSuiteC {
 	 TLS_CHACHA20_POLY1305_SHA256               ("TLS_CHACHA20_POLY1305_SHA256",           true), // 0x1303
 	 TLS_AES_128_CCM_SHA256                     ("TLS_AES_128_CCM_SHA256",                 true), // 0x1304
 	 TLS_AES_128_CCM_8_SHA256                   ("TLS_AES_128_CCM_8_SHA256",               true), // 0x1305
+	 TLS_SM4_GCM_SM3                            ("TLS_SM4_GCM_SM3",                 true), 
+	 TLS_SM4_CCM_SM3                            ("TLS_SM4_CCM_SM3",               true), 
     
 	// TLS 1.2 - AEAD ciphers (GCM) (0x0303)
 	// Ref: https://docs.openssl.org/master/man1/openssl-ciphers/#aes-cipher-suites-for-tls-v12

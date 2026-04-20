@@ -1,13 +1,13 @@
 {
   "messageClass": "ServerHelloMessage",
-  "timestamp": "2026-04-16T13:33:21.294292",
+  "timestamp": "2026-04-20T18:20:44.997971100",
   "handshakeType": "server_hello (2) - Server responds with parameters",
   "handshakeLength": 77,
   "selectedVersion": "TLS12 (0x0303)",
-  "Random": "47E8C409FE203738112C1EA256FD10404F6971B5D3ADEBFAA619E4A4DB274CA0",
+  "Random": "FD6EF8D8D2DDD6BBBF895E2AD6FE4572104FACD40A5545D7731D53304A4B7846",
   "legacySessionIdLength": 32,
-  "legacySessionId": "650094CD59BBE41BA11824930E8F5CFEA10F94B6CE4D50C319DB1F629D081655",
-  "selectedCipherSuite": "TLS_RSA_WITH_AES_128_GCM_SHA256",
+  "legacySessionId": "B7C1B408CAE8CAF88E001B7C1046210B78207D9B8A0F0E98E581B98E5CE105C3",
+  "selectedCipherSuite": "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
   "selectedCompressionMethod": "0x00",
   "extensionsTotalLength": 5,
   "extensions": [

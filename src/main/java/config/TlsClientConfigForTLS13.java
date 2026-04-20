@@ -13,6 +13,9 @@ public class TlsClientConfigForTLS13 implements TlsClientConfig{
 	private final String HOST = GlobalConfig.HOST;
 	private final int PORT = GlobalConfig.PORT;
 	private static TlsClientConfigForTLS13 instance;
+	private CipherSuite[] cipherSuites;
+	private SignatureAndHashAlgorithm[] signatureAndHashAlgorithms;
+	private NamedGroup[] ClientKeyShareNamedGroups;
 	
     private TlsClientConfigForTLS13() {} 
     
@@ -49,27 +52,21 @@ public class TlsClientConfigForTLS13 implements TlsClientConfig{
 
 	    // TLS 1.3 cipher suites
 	    config.setDefaultClientSupportedCipherSuites(
-	        CipherSuite.TLS_CHACHA20_POLY1305_SHA256,
-	        CipherSuite.TLS_AES_128_GCM_SHA256,
-	        CipherSuite.TLS_AES_128_CCM_8_SHA256,
-	        CipherSuite.TLS_AES_128_CCM_SHA256,
-	        CipherSuite.TLS_SM4_GCM_SM3,
-	        CipherSuite.TLS_SM4_CCM_SM3
+	    		cipherSuites
 	    );
-	    
 
 	    // Elliptic curve groups for ECDHE key share
 	    config.setDefaultClientKeyShareNamedGroups(
-	        NamedGroup.ECDH_X25519,
-	        NamedGroup.SECP256R1
+	    		NamedGroup.ECDH_X25519,
+		        NamedGroup.SECP256R1
 	    );
 
 	    // Accepted signature algorithms
         config.setDefaultClientSupportedSignatureAndHashAlgorithms(
-                SignatureAndHashAlgorithm.RSA_PSS_RSAE_SHA256,
-                SignatureAndHashAlgorithm.RSA_PSS_RSAE_SHA384,
+        		SignatureAndHashAlgorithm.RSA_PSS_RSAE_SHA256,       
+        		SignatureAndHashAlgorithm.RSA_PSS_RSAE_SHA384,
                 SignatureAndHashAlgorithm.ECDSA_SHA256,
-                SignatureAndHashAlgorithm.ED25519  
+                SignatureAndHashAlgorithm.ED25519 
             );
 
 	    config.setStopActionsAfterFatal(true);
@@ -81,7 +78,33 @@ public class TlsClientConfigForTLS13 implements TlsClientConfig{
 	
 	 public String getHost() { return HOST; }
 	 public int getPort()    { return PORT; }
-	 public String getTlsVersion() {return "TLS_13";}
+	 
+	 public CipherSuite[] getCipherSuites() {
+		return cipherSuites;
+	}
+
+	public void setCipherSuites(CipherSuite[] cipherSuites) {
+		this.cipherSuites = cipherSuites;
+	}
+
+	public SignatureAndHashAlgorithm[] getSignatureAndHashAlgorithms() {
+		return signatureAndHashAlgorithms;
+	}
+
+	public void setSignatureAndHashAlgorithms(SignatureAndHashAlgorithm[] signatureAndHashAlgorithms) {
+		this.signatureAndHashAlgorithms = signatureAndHashAlgorithms;
+	}
+
+	public NamedGroup[] getClientKeyShareNamedGroups() {
+		return ClientKeyShareNamedGroups;
+	}
+
+	public void setClientKeyShareNamedGroups(NamedGroup[] clientKeyShareNamedGroups) {
+		ClientKeyShareNamedGroups = clientKeyShareNamedGroups;
+	}
+
+	public String getTlsVersion() {return "TLS_13";}
+
 }
 
 

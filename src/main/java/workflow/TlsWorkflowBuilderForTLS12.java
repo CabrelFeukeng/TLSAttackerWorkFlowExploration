@@ -1,5 +1,6 @@
 package workflow;
 
+import config.TlsClientConfig;
 import config.TlsClientConfigForTLS12;
 import de.rub.nds.tlsattacker.core.protocol.message.*;
 import de.rub.nds.tlsattacker.core.workflow.WorkflowTrace;
@@ -20,9 +21,9 @@ public class TlsWorkflowBuilderForTLS12 implements TlsWorkflowBuilder {
 	 *
 	 * @return an unexecuted workflow trace
 	 */
-	public WorkflowTrace build() {
+	public WorkflowTrace build(TlsClientConfig clientConfig) {
 
-		TlsClientConfigForTLS12 config = TlsClientConfigForTLS12.getInstance();
+		//TlsClientConfigForTLS12 config = TlsClientConfigForTLS12.getInstance();
 		
 		/**
 		 * Client -> Server
@@ -32,7 +33,7 @@ public class TlsWorkflowBuilderForTLS12 implements TlsWorkflowBuilder {
 		 *    - random bytes for session establishment
 		 */
 	    trace.addTlsAction(new SendAction(
-	            new ClientHelloMessage(config.build())
+	            new ClientHelloMessage(clientConfig.build())
 	    ));
 
 	    /**

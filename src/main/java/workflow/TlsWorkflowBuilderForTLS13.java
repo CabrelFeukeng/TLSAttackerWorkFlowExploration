@@ -1,5 +1,6 @@
 package workflow;
 
+import config.TlsClientConfig;
 import config.TlsClientConfigForTLS13;
 import de.rub.nds.tlsattacker.core.config.Config;
 import de.rub.nds.tlsattacker.core.protocol.message.CertificateMessage;
@@ -25,9 +26,9 @@ public class TlsWorkflowBuilderForTLS13 implements TlsWorkflowBuilder  {
 	 * Constructs a complete TLS 1.3 handshake.
 	 * @return not executed workflow trace
 	 */
-	public WorkflowTrace build() {
+	public WorkflowTrace build(TlsClientConfig clientConfig) {
 		
-		TlsClientConfigForTLS13 config = TlsClientConfigForTLS13.getInstance();
+		//TlsClientConfigForTLS13 config = TlsClientConfigForTLS13.getInstance();
 
 		/**
 		 * Client -> Server
@@ -37,7 +38,7 @@ public class TlsWorkflowBuilderForTLS13 implements TlsWorkflowBuilder  {
 		 *     - signature_algorithms
 		 */
 	    trace.addTlsAction(new SendAction(
-	    		new ClientHelloMessage((Config) config.build())
+	    		new ClientHelloMessage((Config) clientConfig.build())
 	    ));
 
 	    

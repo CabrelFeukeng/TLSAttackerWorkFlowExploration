@@ -14,6 +14,9 @@ public class TlsClientConfigForTLS12 implements TlsClientConfig {
     private final int    PORT = GlobalConfig.PORT;
 
     private static TlsClientConfigForTLS12 instance;
+    private CipherSuite[] cipherSuites;
+	private SignatureAndHashAlgorithm[] signatureAndHashAlgorithms;
+	private NamedGroup[] ClientKeyShareNamedGroups;
 
     private TlsClientConfigForTLS12() {}
 
@@ -43,8 +46,7 @@ public class TlsClientConfigForTLS12 implements TlsClientConfig {
 
         // Cipher suites — ECDHE uniquement, pas de DHE ni RSA
         config.setDefaultClientSupportedCipherSuites(
-            CipherSuite.TLS_RSA_WITH_AES_128_GCM_SHA256,
-            CipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+        		cipherSuites
         );
 
         // Groupes ECDHE — doit inclure SECP256R1 (= prime256v1 côté serveur)
@@ -71,4 +73,30 @@ public class TlsClientConfigForTLS12 implements TlsClientConfig {
     public String getHost() { return HOST; }
     public int    getPort() { return PORT; }
     public String getTlsVersion() {return "TLS_12";}
+
+	public CipherSuite[] getCipherSuites() {
+		return cipherSuites;
+	}
+
+	public void setCipherSuites(CipherSuite[] cipherSuites) {
+		this.cipherSuites = cipherSuites;
+	}
+
+	public SignatureAndHashAlgorithm[] getSignatureAndHashAlgorithms() {
+		return signatureAndHashAlgorithms;
+	}
+
+	public void setSignatureAndHashAlgorithms(SignatureAndHashAlgorithm[] signatureAndHashAlgorithms) {
+		this.signatureAndHashAlgorithms = signatureAndHashAlgorithms;
+	}
+
+	public NamedGroup[] getClientKeyShareNamedGroups() {
+		return ClientKeyShareNamedGroups;
+	}
+
+	public void setClientKeyShareNamedGroups(NamedGroup[] clientKeyShareNamedGroups) {
+		ClientKeyShareNamedGroups = clientKeyShareNamedGroups;
+	}
+
+	
 }

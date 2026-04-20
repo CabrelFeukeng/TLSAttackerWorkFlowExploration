@@ -175,7 +175,6 @@ VARIABLES
     server_calculated_symmetric_key /*Symmetric Key calculated by server*/
 
 PROPERTIES
-
     ocsp_status_constant = 0..1 &
     compression_method_constant = 0..1 &
     certificate_serial_number = 0..5 &
@@ -294,14 +293,20 @@ INITIALISATION
 
 OPERATIONS
 
-    SendClientHello (legacy_version, supported_versions, legacy_compression_methods, pre_shared_key, signature_algorithms, supported_groups, cipher_suites) =
+    SendClientHello (legacy_version,
+                     supported_versions, 
+                     legacy_compression_methods, 
+                     pre_shared_key, 
+                     signature_algorithms, 
+                     supported_groups, 
+                     cipher_suites) =
     PRE /*Still need to add the random in the PRE*/
         session_machine'State = SESSION_CLOSED or
         (session_machine'State = RECEIVEHELLORETRYREQUEST & session_machine'Status = SUCCEEDED) &
         supported_versions <: VERSION &
         legacy_compression_methods : compression_method_constant &
-	pre_shared_key <: KEYS &
-	signature_algorithms <: SIGNATURE_ALGORITHMS &
+	     pre_shared_key <: KEYS &
+	     signature_algorithms <: SIGNATURE_ALGORITHMS &
         supported_groups <: SUPPORTED_GROUPS &
         cipher_suites <: CIPHER_SUITE &
         legacy_version : VERSION_NUMBERS
@@ -315,7 +320,7 @@ OPERATIONS
         client_legacy_version := legacy_version;
         /* Simulate sending ClientHello and determine the alert message */
         IF TLS_1_3 : client_supported_versions
-	    THEN
+	     THEN
                //Supported groups can be empty? -> Server will simply send helloretryrequest if so for Version 1.3 support
                IF (client_signature_algorithms /= {}) &
                   (client_cipher_suites /= {}) &
@@ -351,6 +356,8 @@ OPERATIONS
             session_machine := rec(State : SENDCLIENTHELLO, Status : FAILED)
         END
     END;
+
+    
 
    /* Server Receives the ClientHello -> Parameters are not added here because there are considered in the sendclienthello operation */
     ReceiveClientHello =
@@ -407,7 +414,7 @@ OPERATIONS
         server_legacy_compression_methods := legacy_compression_methods ||
         server_pre_shared_key := pre_shared_key || /* It is possible for the pre_shared_key field to be empty if no symmetric key identities are known to the client */
         server_cipher_suite := cipher_suites ||
-        server_legacy_session_id_echo := legacy_session_id_echo ||
+        server_legacy_session_ id_echo := legacy_session_id_echo ||
         server_key_share := key_share ||
         /*It is possible for a server to send a signature algorithm or supported group that the client didnt send in it's clienthello Hence, it is the role of the client             to             adapt to this or send an alert message and terminate the session. This is why it won't be tested in the IF statements */
         server_signature_algorithm := signature_algorithm ||

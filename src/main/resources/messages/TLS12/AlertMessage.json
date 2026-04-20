@@ -1,0 +1,6 @@
+{
+  "messageClass": "AlertMessage",
+  "timestamp": "2026-04-20T18:20:45.046468900",
+  "alertLevel": "fatal (2)",
+  "alertDescription": "bad_record_mac (20) - Invalid MAC (TLS 1.2 and below)"
+}

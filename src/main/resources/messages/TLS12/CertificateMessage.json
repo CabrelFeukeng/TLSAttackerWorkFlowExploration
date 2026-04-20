@@ -1,6 +1,6 @@
 {
   "messageClass": "CertificateMessage",
-  "timestamp": "2026-04-16T13:33:21.299533800",
+  "timestamp": "2026-04-20T18:20:45.003077300",
   "handshakeType": "certificate (11) - Certificate transmission",
   "handshakeLength": 787,
   "certificatesListLength": 784,

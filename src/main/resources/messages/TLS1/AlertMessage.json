@@ -1,0 +1,6 @@
+{
+  "messageClass": "AlertMessage",
+  "timestamp": "2026-04-20T18:25:13.721262100",
+  "alertLevel": "fatal (2)",
+  "alertDescription": "protocol_version (70) - Protocol version mismatch"
+}

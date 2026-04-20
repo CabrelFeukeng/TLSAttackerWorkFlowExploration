@@ -1,0 +1,5 @@
+{
+  "messageClass": "DHEServerKeyExchangeMessage",
+  "timestamp": "2026-04-20T18:20:45.028939",
+  "warning": "Message type not explicitly handled"
+}
